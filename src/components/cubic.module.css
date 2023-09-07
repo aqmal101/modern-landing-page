@@ -1,0 +1,14 @@
+.cubic {
+    background-color: #cee100;
+    width: 90px;
+    height: 70px;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    /* transition: width 2s;
+    transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1); */
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    transform: cubic-bezier(0.1, 0.7, 1.0, 0.1);
+}
