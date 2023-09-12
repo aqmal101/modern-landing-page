@@ -1,15 +1,25 @@
-@keyframes runningText {
-    0% {
-        transform: translateX(100%);
-    }
-
-    100% {
-        transform: translateX(-100%);
-    }
+.circle {
+    position: absolute;
 }
 
-.running-text {
-    white-space: nowrap;
-    overflow: hidden;
-    animation: runningText 5s linear infinite;
+.inner-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    background-color: green;
+    margin-top: 28px;
+    position: relative;
+    margin: 0 auto;
+
+}
+
+.outer-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background-color: blue;
+    margin-top: 50px;
+    text-align: center;
+    text-align: left;
+    margin: 0 auto;
 }

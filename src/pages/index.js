@@ -1,84 +1,99 @@
-import { useRef } from "react";
 import Image from "next/image";
 import { Inter } from "next/font/google";
+import { useRouter } from "next/router";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
-import { Icon } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import Cottage from "../assets/cottage3d.png";
+import Cottage from "../assets/HomeImage2.jpg";
+import HeroCarousel from "@/components/heroCarousel";
+import CubicScroll from "@/components/cubicScroll";
 import InstagramSection from "@/components/instagramSection";
-import LatestProjects from "@/components/LatestProject";
+// import LatestProjects from "@/components/LatestProject";
+import ProjectCarousel from "@/components/latestProject/ProjectCarousel";
 import LatestArticle from "@/components/latestArticle";
 import RunningText from "@/components/runningText";
-// import HeroCarousel from "@/components/heroCarousel";
-import Landscape from "../assets/landscape1.png";
-import styles from "../../src/components/cubic.module.css";
+// import { DisplayCircle } from "@/components/runningText";
+import styles from "@/components/patternBg/pattern.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const quoteRef = useRef(null); // Buat useRef untuk mengarahkan ke elemen dengan ID "quote"
-  const scrollToQuote = () => {
-    quoteRef.current.scrollIntoView({ scrollBehavior: "smooth" }); // Gunakan scrollIntoView dengan efek smooth
-  };
+  const router = useRouter();
 
   return (
     <main
       className={`flex w-full h-fit min-h-screen flex-col items-center justify-between  ${inter.className}`}
+      style={{ scrollBehavior: "smooth" }}
     >
       <Navbar />
-      <div className="min-h-screen w-full bg-white">
-        {/* <HeroCarousel /> */}
-        <Image
-          src={Landscape}
-          className="w-full h-screen"
-          alt="cottage 3d rendered"
-        />
-      </div>
-      <div className={`${styles["cubic"]} scroll-smooth absolute bottom-0`}>
-        <a href="#quote" onClick={scrollToQuote}>
-          <Icon as={ChevronDownIcon} w={60} h={60} />
-        </a>
-      </div>
-
+      <HeroCarousel />
+      <CubicScroll />
       <div
         id="quote"
-        ref={quoteRef}
-        className="min-h-screen w-full flex flex-row items-center justify-around px-20 py-4"
+        className="min-h-screen h-auto w-full flex flex-row items-start justify-around px-20 py-20 my-20"
       >
-        <span className="w-5/12">
-          <Image src={Cottage} alt="cottage 3d rendered" />
-        </span>
-        <div className="w-5/12 min-h-screen flex flex-col bg-white ">
-          <span className="py-3 font-semibold text-lime-300">EST. 1991 </span>
-          <span className="flex flex-col space-y-8">
-            <p className="text-5xl font-extrabold">
-              Simplicity Is The Ultimate Sophistictation
-            </p>
-            <p className="text-2xl">
-              “Recognizing the need is the primary condition for design” -
-              Charles Eames
-            </p>
-            <p className="text-justify">
-              Founded by Jugenr Kloop in 1991, we're an employee-owned firm
-              pursuing a democratic design process that values everyone's input.
-              Today we have more than 150 people in London, Hong Kong & Sydney
-              providing architecture, interior & urban design services from
-              concept to completion. With a passion for quality products,
-              Liarch's mission is to uncover special artisans, unique materials
-              & products.
-            </p>
+        <div className="h-[500px] w-5/12 bg-white relative">
+          <div
+            className={`top-0 left-0 bg-white h-[90%] w-[90%] ${styles["pattern-bg"]}`}
+          ></div>
+          <span className="absolute bottom-0 right-0 h-[90%] w-[90%] hover:scale-100 overflow-hidden transition-all duration-300">
+            <Image
+              src={Cottage}
+              alt="cottage 3d rendered"
+              className="relative object-cover w-full h-full hover:scale-110 transition-all duration-300"
+            />
           </span>
-          <button className="bg-white w-fit py-5 border-[2px] text-lime-400 border-lime-400 px-6 rounded-md my-10 hover:bg-lime-400 hover:text-white transition-all ease-in-out duration-500">
-            LEARN MORE
+          {/* <RunningText /> */}
+        </div>
+
+        <div className="w-5/12 min-h-screen flex flex-col space-y-14">
+          <span className="font-semibold text-orange-500">EST. 1991 </span>
+          <span className="flex flex-col space-y-10">
+            <p className="text-5xl font-extrabold">
+              シンプリシティは究極の洗練です
+            </p>
+
+            <p className="text-2xl">
+              「ニーズを認識することは、デザインの主要な条件です」 -
+              チャールズ・イームズ
+            </p>
+            <span className="space-y-5">
+              <p>弊社、株式会社アーバン</p>
+              <p>
+                建築・土木工事に関するご相談やコンサルティング業務を提供しており、
+              </p>
+              <p> 産業廃棄物の収集と運搬も行っています。</p>
+              <p> また、販売、交換、賃貸、管理、および所有権の仲介も行い、</p>
+              <p> さらにレストランの経営も受け付けております。</p>
+            </span>
+          </span>
+          <button
+            className="bg-white w-fit py-5 border-[2px] text-orange-500 border-orange-500 px-6 rounded-md my-10 hover:bg-orange-500 hover:text-white transition-all ease-in-out duration-500"
+            onClick={() => router.push("/about-us#company")}
+          >
+            詳細を見る
           </button>
         </div>
         {/* <RunningText /> */}
       </div>
       <span className="border-b-[1px] border-gray-500"></span>
-      {/* instagram */}
-      <LatestProjects />
+      {/* <div className="flex flex-row w-full justify-between py-24 px-10 bg-white">
+        <div className="flex flex-row  max-w-[300px] items-center space-x-4">
+          <span className="text-6xl">100%</span>
+          <span>SATISFITATION CLIENTS</span>
+        </div>
+        <div className="flex flex-row  max-w-[300px] items-center space-x-4">
+          <span className="text-6xl">250</span>
+          <span>EMPLOYEES ON WORLDWIDE</span>
+        </div>
+        <div className="flex flex-row  max-w-[330px] items-center space-x-4">
+          <span className="text-6xl">3,875</span>
+          <span>PROJECTS COMPLETED ON 60 COUNTRIES</span>
+        </div>
+      </div> */}
+      <ProjectCarousel />
+      {/* <LatestProjects /> */}
       <LatestArticle />
+      <span className="border-b-[2px] border-gray-500 py-9"></span>
       <InstagramSection />
       <Footer />
     </main>

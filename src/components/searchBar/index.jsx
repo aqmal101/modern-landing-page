@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-// import styles from "./searchBar.module.css";
 import { IconButton, Icon } from "@chakra-ui/react";
 import { BiSearch } from "react-icons/bi";
-import { CloseIcon } from "@chakra-ui/icons";
+import { AiOutlineClose } from "react-icons/ai";
 
 function SearchBar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -11,22 +10,27 @@ function SearchBar() {
     setIsSearchOpen(!isSearchOpen);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      setIsSearchOpen(false); // Tutup kolom pencarian saat tombol "Enter" ditekan
+    }
+  };
+
   return (
-    <div
-      className={` flex flex-row items-center ${isSearchOpen ? "open" : ""}`}
-    >
+    <div className={`flex flex-row items-center ${isSearchOpen ? "open" : ""}`}>
       {isSearchOpen ? (
         <>
           <input
             type="text"
-            placeholder="type and hit enter to search ..."
+            placeholder="検索する ..."
             _placeholder={{ text: "10px" }}
-            className="w-[300px] h-[60px] pl-3 z-10 rounded-none absolute right-[50px] focus:border-transparent"
+            className="w-[300px] h-[60px] pl-3 z-10 bg-white rounded-none absolute right-[110px] focus:border-transparent"
             focus={{ borderStyle: "none" }}
             autoFocus
+            onKeyPress={handleKeyPress} // Menambahkan penanganan tombol Enter
           />
           <IconButton className="close-button" onClick={toggleSearch}>
-            <Icon as={CloseIcon} />
+            <Icon as={AiOutlineClose} boxSize={25} />
           </IconButton>
         </>
       ) : (
